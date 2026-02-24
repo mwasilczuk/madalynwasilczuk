@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Madalyn K. Wasilczuk — Legal Scholar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1e2330;
+    --paper: #f7f8fa;
+    --warm-mid: #e4e7ee;
+    --accent: #9a7c2f;
+    --accent-light: #c9a84c;
+    --muted: #5e6475;
+    --rule: #cdd1da;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 18px;
+    line-height: 1.7;
+  }
+
+  /* ---- NAV ---- */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: var(--paper);
+    border-bottom: 1px solid var(--rule);
+    padding: 0 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+  }
+
+  .nav-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1rem;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover,
+  .nav-links a.active {
+    color: var(--accent);
+  }
+
+  /* ---- PAGES ---- */
+  .page {
+    display: none;
+    min-height: 100vh;
+    padding-top: 60px;
+    animation: fadeIn 0.35s ease;
+  }
+
+  .page.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ---- HOME ---- */
+  .home-hero {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 6rem 2.5rem 4rem;
+  }
+
+  .home-hero .eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.2rem;
+  }
+
+  .home-hero h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(2.6rem, 5vw, 4rem);
+    font-weight: 400;
+    line-height: 1.15;
+    margin-bottom: 1.5rem;
+    color: var(--ink);
+  }
+
+  .home-hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .home-hero .lead {
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 640px;
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+  }
+
+  .home-rule {
+    width: 60px;
+    height: 2px;
+    background: var(--accent);
+    margin: 2.5rem 0;
+  }
+
+  .home-research-areas {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 2.5rem 5rem;
+  }
+
+  .home-research-areas h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 2rem;
+  }
+
+  .project-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+  }
+
+  .project-card {
+    background: var(--paper);
+    padding: 2.5rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    text-decoration: none;
+    display: block;
+    color: var(--ink);
+  }
+
+  .project-card:hover { background: var(--warm-mid); }
+
+  .project-card .card-num {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+
+  .project-card h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+  }
+
+  .project-card p {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  .card-arrow {
+    display: inline-block;
+    margin-top: 1.25rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  /* ---- ABOUT ---- */
+  .content-wrap {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 5rem 2.5rem;
+  }
+
+  .page-eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+
+  .page-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 2.5rem;
+  }
+
+  .content-wrap p {
+    font-size: 1rem;
+    line-height: 1.85;
+    color: #333;
+    margin-bottom: 1.4rem;
+    font-weight: 300;
+  }
+
+  .content-wrap p strong {
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .divider {
+    width: 48px;
+    height: 2px;
+    background: var(--accent);
+    margin: 2.5rem 0;
+  }
+
+  /* ---- ARTICLES ---- */
+  .articles-list {
+    margin-top: 2rem;
+  }
+
+  .article-item {
+    display: flex;
+    gap: 2rem;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: baseline;
+  }
+
+  .article-item:first-child { border-top: 1px solid var(--rule); }
+
+  .article-year {
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    min-width: 42px;
+    padding-top: 0.15rem;
+    font-weight: 400;
+  }
+
+  .article-body { flex: 1; }
+
+  .article-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: 0.3rem;
+    color: var(--ink);
+  }
+
+  .article-citation {
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  /* ---- DATA PROJECT PAGES ---- */
+  .project-hero {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 5rem 2.5rem;
+  }
+
+  .project-hero-inner {
+    max-width: 780px;
+    margin: 0 auto;
+  }
+
+  .project-hero .page-eyebrow { color: var(--accent-light); }
+
+  .project-hero .page-title { color: var(--paper); margin-bottom: 1.25rem; }
+
+  .project-hero .lead {
+    font-size: 1.05rem;
+    color: #c8c3bc;
+    line-height: 1.8;
+    max-width: 600px;
+    font-weight: 300;
+  }
+
+  .project-content {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 4rem 2.5rem;
+  }
+
+  .project-content p {
+    font-size: 1rem;
+    line-height: 1.85;
+    color: #333;
+    margin-bottom: 1.4rem;
+    font-weight: 300;
+  }
+
+  .dashboard-cta {
+    display: inline-block;
+    margin-top: 2rem;
+    padding: 1rem 2.2rem;
+    background: var(--accent);
+    color: white;
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: background 0.2s;
+  }
+
+  .dashboard-cta:hover { background: #7a6020; }
+
+  .dashboard-cta-wrap {
+    margin-top: 3rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  .dashboard-cta-wrap p {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-bottom: 0 !important;
+  }
+
+  /* ---- FOOTER ---- */
+  footer {
+    text-align: center;
+    padding: 3rem 2.5rem;
+    border-top: 1px solid var(--rule);
+    font-size: 0.8rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 680px) {
+    nav { padding: 0 1.2rem; }
+    .nav-name { font-size: 0.85rem; }
+    .nav-links { gap: 1rem; }
+    .nav-links a { font-size: 0.7rem; }
+    .home-hero, .home-research-areas, .content-wrap, .project-content { padding-left: 1.4rem; padding-right: 1.4rem; }
+    .project-cards { grid-template-columns: 1fr; }
+    .project-hero { padding: 3.5rem 1.4rem; }
+    .article-item { flex-direction: column; gap: 0.4rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-name" href="#" onclick="showPage('home')">Madalyn K. Wasilczuk</a>
+  <ul class="nav-links">
+    <li><a href="#" onclick="showPage('home')" id="nav-home" class="active">Home</a></li>
+    <li><a href="#" onclick="showPage('about')" id="nav-about">About</a></li>
+    <li><a href="#" onclick="showPage('articles')" id="nav-articles">Writing</a></li>
+    <li><a href="#" onclick="showPage('pregnancy')" id="nav-pregnancy">Pregnancy Criminalization</a></li>
+    <li><a href="#" onclick="showPage('deaths')" id="nav-deaths">Deaths Behind Bars</a></li>
+    <li><a href="#" onclick="showPage('media')" id="nav-media">Media</a></li>
+    <li><a href="#" onclick="showPage('cv')" id="nav-cv">CV</a></li>
+  </ul>
+</nav>
+
+<!-- HOME -->
+<div class="page active" id="page-home">
+  <div class="home-hero">
+    <p class="eyebrow">Lawyer &amp; Legal Scholar</p>
+    <h1>Madalyn K.<br><em>Wasilczuk</em></h1>
+    <p class="lead">Associate Professor of Law at the University of South Carolina Joseph F. Rice School of Law. Her research examines state violence, criminalization, incarceration, and the law's role in shaping harm and inequality.</p>
+    <div class="home-rule"></div>
+  </div>
+
+  <div class="home-research-areas">
+    <h2>Research Projects</h2>
+    <div class="project-cards">
+      <a class="project-card" href="#" onclick="showPage('pregnancy')">
+        <h3>Pregnancy Criminalization</h3>
+        <p>Tracking the prosecution and policing of pregnant people in the post-Dobbs landscape, in collaboration with Pregnancy Justice.</p>
+        <span class="card-arrow">Explore →</span>
+      </a>
+      <a class="project-card" href="#" onclick="showPage('deaths')">
+        <h3>Deaths Behind Bars</h3>
+        <p>A data project documenting deaths in South Carolina's jails and prisons, in partnership with Incarceration Transparency.</p>
+        <span class="card-arrow">Explore →</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div class="page" id="page-about">
+  <div class="content-wrap">
+    <p class="page-eyebrow">About</p>
+    <h1 class="page-title">Madalyn K. Wasilczuk</h1>
+    <div style="display:flex; gap:2.5rem; align-items:flex-start; margin-bottom:2rem; flex-wrap:wrap;">
+      <img src="headshot.jpg" alt="Madalyn K. Wasilczuk" style="width:200px; height:240px; object-fit:cover; object-position:center top; flex-shrink:0; border:1px solid var(--rule);">
+      <div style="flex:1; min-width:220px;">
+        <p style="margin-bottom:0.5rem;"><strong>Professor of Law</strong><br>University of South Carolina Joseph F. Rice School of Law</p>
+        <div class="divider"></div>
+        <p>Madalyn K. Wasilczuk is a Professor of Law at the University of South Carolina Joseph F. Rice School of Law. Her work focuses on criminal legal system issues, including policing, race, extreme sentencing, conditions of confinement, and the prosecution and detention of children and pregnant people. Her scholarship examines the ways that law produces and perpetuates harm and how legal doctrine obscures rather than remedies that harm.</p>
+      </div>
+    </div>
+    <p>Professor Wasilczuk's scholarship appears in publications such as the <em>Georgetown Law Journal</em>, <em>Wisconsin Law Review</em>, and <em>Buffalo Law Review</em>, and has been featured by numerous local and national news outlets. Her <a href="#" onclick="showPage('deaths'); return false;" style="color:var(--accent);">database on deaths in custody in South Carolina</a> represents the only publicly available dataset of deaths in the state's lockups, juvenile detention centers, jails, and prisons since 2015. She is also the co-Principal Investigator on a <a href="#" onclick="showPage('pregnancy'); return false;" style="color:var(--accent);">national study of pregnancy criminalization</a> in the three years following the Supreme Court's decision in <em>Dobbs v. Jackson Women's Health Center</em>.</p>
+    <p>Professor Wasilczuk directs the Youth Defender Clinic and teaches The Death Penalty, Incarceration Law, Criminal Procedure, Criminal Adjudication, and a Juvenile Justice Seminar.</p>
+    <p>Before joining the University of South Carolina Joseph F. Rice School of Law faculty, Professor Wasilczuk taught at Louisiana State University Paul M. Hebert Law Center, where she directed the Juvenile Defense Clinic and taught courses on capital punishment and carceral abolition. Prior to that, she worked at the Cornell Center on the Death Penalty Worldwide, where she taught in the International Human Rights Clinic and Capital Punishment Clinic, and at the Defender Association of Philadelphia, where she was an Assistant Defender. She has also served as a fellow with the International Legal Foundation in Myanmar and Tunisia, where she mentored and trained local public defenders.</p>
+    <p>Professor Wasilczuk holds a B.A. in International Studies with Honors, <em>summa cum laude</em>, from American University and a J.D. from New York University School of Law, where she earned the Leonard J. Schreier Memorial Prize in Ethics. She is licensed to practice law in Louisiana, the U.S. Court for Middle District of Louisiana, the U.S. Court for the Eastern District of Louisiana, the U.S. Court of Appeals for the Fifth Circuit, Pennsylvania, and South Carolina (limited to clinical practice).</p>
+    <div class="divider"></div>
+    <p style="font-size:0.85rem; color: var(--muted);">For a full biography, see her <a href="https://sc.edu/study/colleges_schools/law/faculty_and_staff/directory/wasilczuk_madalyn.php" target="_blank" style="color:var(--accent);">faculty profile</a> at the USC School of Law.</p>
+  </div>
+</div>
+
+<!-- ARTICLES -->
+<div class="page" id="page-articles">
+  <div class="content-wrap">
+    <p class="page-eyebrow">Writing</p>
+    <h1 class="page-title">Writing</h1>
+
+    <h2 style="font-family:'Playfair Display',Georgia,serif; font-size:1.1rem; font-weight:600; margin-bottom:0.25rem;">Law Review Articles</h2>
+    <div class="articles-list">
+
+      <div class="article-item">
+        <span class="article-year">2024</span>
+        <div class="article-body">
+          <div class="article-title"><a href="https://wlr.law.wisc.edu/wp-content/uploads/sites/1263/2024/05/18-Wasilczuk-Online-UPDATED.pdf" target="_blank" style="color:inherit; text-decoration:underline; text-decoration-color: var(--rule); text-underline-offset: 3px; transition: text-decoration-color 0.2s;" onmouseover="this.style.textDecorationColor='var(--accent)'" onmouseout="this.style.textDecorationColor='var(--rule)'">Killing Stays</a></div>
+          <div class="article-citation">2024 Wis. L. Rev. 3 (2024)</div>
+        </div>
+      </div>
+
+      <div class="article-item">
+        <span class="article-year">2023</span>
+        <div class="article-body">
+          <div class="article-title"><a href="https://www.law.georgetown.edu/georgetown-law-journal/wp-content/uploads/sites/26/2023/07/GT-GGLJ230026.pdf" target="_blank" style="color:inherit; text-decoration:underline; text-decoration-color: var(--rule); text-underline-offset: 3px; transition: text-decoration-color 0.2s;" onmouseover="this.style.textDecorationColor='var(--accent)'" onmouseout="this.style.textDecorationColor='var(--rule)'">The Racialized Violence of Police Canine Force</a></div>
+          <div class="article-citation">111 Geo. L.J. 5 (2023)</div>
+        </div>
+      </div>
+
+      <div class="article-item">
+        <span class="article-year">2023</span>
+        <div class="article-body">
+          <div class="article-title"><a href="https://www.law.nyu.edu/sites/default/files/Wasilczuk%20-%20Clinic%20as%20Site%20of%20Grounded%20Pedagogy.pdf" target="_blank" style="color:inherit; text-decoration:underline; text-decoration-color: var(--rule); text-underline-offset: 3px; transition: text-decoration-color 0.2s;" onmouseover="this.style.textDecorationColor='var(--accent)'" onmouseout="this.style.textDecorationColor='var(--rule)'">The Clinic as a Site of Grounded Pedagogy</a></div>
+          <div class="article-citation">29 Clin. L. Rev. 405 (2023)</div>
+        </div>
+      </div>
+
+      <div class="article-item">
+        <span class="article-year">2023</span>
+        <div class="article-body">
+          <div class="article-title"><a href="https://scholarlycommons.law.cwsl.edu/cwlr/vol59/iss1/2/" target="_blank" style="color:inherit; text-decoration:underline; text-decoration-color: var(--rule); text-underline-offset: 3px; transition: text-decoration-color 0.2s;" onmouseover="this.style.textDecorationColor='var(--accent)'" onmouseout="this.style.textDecorationColor='var(--rule)'">For Their Own Good: Girls, Sexuality, and State Violence in the Name of Safety</a></div>
+          <div class="article-citation">59 Cal. W. L. Rev. 1 (2023)</div>
+        </div>
+      </div>
+
+      <div class="article-item">
+        <span class="article-year">2022</span>
+        <div class="article-body">
+          <div class="article-title"><a href="https://digitalcommons.law.buffalo.edu/buffalolawreview/vol70/iss1/7/" target="_blank" style="color:inherit; text-decoration:underline; text-decoration-color: var(--rule); text-underline-offset: 3px; transition: text-decoration-color 0.2s;" onmouseover="this.style.textDecorationColor='var(--accent)'" onmouseout="this.style.textDecorationColor='var(--rule)'">Developing Police</a></div>
+          <div class="article-citation">70 Buff. L. Rev. 271 (2022)</div>
+        </div>
+      </div>
+
+    </div>
+
+    <h2 style="font-family:'Playfair Display',Georgia,serif; font-size:1.1rem; font-weight:600; margin-top:3rem; margin-bottom:0.25rem;">Op-Eds &amp; Short Articles</h2>
+    <div class="articles-list">
+
+      <div class="article-item">
+        <span class="article-year">2023</span>
+        <div class="article-body">
+          <div class="article-title"><a href="https://harvardlawreview.org/blog/2023/04/fifth-amendment-rights-as-abortion-rights/" target="_blank" style="color:inherit; text-decoration:underline; text-decoration-color: var(--rule); text-underline-offset: 3px; transition: text-decoration-color 0.2s;" onmouseover="this.style.textDecorationColor='var(--accent)'" onmouseout="this.style.textDecorationColor='var(--rule)'">5th Amendment Rights as Abortion Rights</a></div>
+          <div class="article-citation">Harv. L. Rev. Blog (Apr. 11, 2023)</div>
+        </div>
+      </div>
+
+      <div class="article-item">
+        <span class="article-year">2022</span>
+        <div class="article-body">
+          <div class="article-title"><a href="https://www.lawfareblog.com/how-young-too-young-be-police-officer" target="_blank" style="color:inherit; text-decoration:underline; text-decoration-color: var(--rule); text-underline-offset: 3px; transition: text-decoration-color 0.2s;" onmouseover="this.style.textDecorationColor='var(--accent)'" onmouseout="this.style.textDecorationColor='var(--rule)'">How Young Is Too Young To Be a Police Officer?</a></div>
+          <div class="article-citation">Lawfare (Jul. 29, 2022)</div>
+        </div>
+      </div>
+
+      <div class="article-item">
+        <span class="article-year">2021</span>
+        <div class="article-body">
+          <div class="article-title"><a href="https://www.theadvocate.com/baton_rouge/opinion/article_b6ae8b04-d688-11eb-9cb4-cb56948ed5c2.html" target="_blank" style="color:inherit; text-decoration:underline; text-decoration-color: var(--rule); text-underline-offset: 3px; transition: text-decoration-color 0.2s;" onmouseover="this.style.textDecorationColor='var(--accent)'" onmouseout="this.style.textDecorationColor='var(--rule)'">Rules are meant to protect children, but police use them to shield themselves</a></div>
+          <div class="article-citation">The Advocate (Jun. 30, 2021)</div>
+        </div>
+      </div>
+
+      <div class="article-item">
+        <span class="article-year">2020</span>
+        <div class="article-body">
+          <div class="article-title"><a href="https://www.theadvocate.com/baton_rouge/opinion/article_a5880868-5a75-11ea-a075-6b6eaf99834e.html" target="_blank" style="color:inherit; text-decoration:underline; text-decoration-color: var(--rule); text-underline-offset: 3px; transition: text-decoration-color 0.2s;" onmouseover="this.style.textDecorationColor='var(--accent)'" onmouseout="this.style.textDecorationColor='var(--rule)'">Two tragedies occur when youths kill, end up in adult prisons</a></div>
+          <div class="article-citation">The Advocate (Mar. 4, 2020)</div>
+        </div>
+      </div>
+
+      <div class="article-item">
+        <span class="article-year">2018</span>
+        <div class="article-body">
+          <div class="article-title"><a href="https://ilg2.org/2018/04/24/applying-the-death-penalty-to-drug-dealers-is-never-appropriate-it-violates-international-law/" target="_blank" style="color:inherit; text-decoration:underline; text-decoration-color: var(--rule); text-underline-offset: 3px; transition: text-decoration-color 0.2s;" onmouseover="this.style.textDecorationColor='var(--accent)'" onmouseout="this.style.textDecorationColor='var(--rule)'">Applying the death penalty to drug dealers is never 'appropriate'. It violates international law.</a></div>
+          <div class="article-citation">IntLawGrrls (Apr. 24, 2018)</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- PREGNANCY CRIMINALIZATION -->
+<div class="page" id="page-pregnancy">
+  <div class="project-hero">
+    <div class="project-hero-inner">
+      <p class="page-eyebrow">Research Project</p>
+      <h1 class="page-title">Pregnancy Criminalization</h1>
+      <p class="lead">Tracking the prosecution and policing of pregnant people across the United States.</p>
+    </div>
+  </div>
+
+  <div class="project-content">
+    <p>The Pregnancy Prosecutions Tracking Study documents criminal prosecutions related to pregnancy across the United States. To date, the study has identified 412 cases across 16 states. The dashboard presents data on where prosecutions occurred, the demographics of defendants, the types of charges brought, and the role of health care and family policing systems in supporting prosecutions.</p>
+    <p>The data reveal that more than three-quarters of defendants were low-income individuals. The majority of charges alleged some form of child abuse, neglect, or endangerment, and nearly all cases involved allegations of substance use during pregnancy. The study also tracks the pregnancy outcomes involved in each case and examines whether prosecutors were even required to prove fetal harm — in 378 of 441 charges, they were not.</p>
+    <p>The dashboard also documents the systems that work alongside the criminal legal system to surveil pregnant people: in 264 cases, information supporting prosecution was obtained or disclosed in a medical setting, and in 217 cases, the family policing system was involved.</p>
+    <p>This project is conducted in collaboration with <strong>Professor Wendy Bach</strong>, <strong>Dr. Kendra Hutchens</strong>, and <strong>Pregnancy Justice</strong>, a national advocacy organization dedicated to defending the rights of pregnant people.</p>
+
+    <div class="dashboard-cta-wrap">
+      <p>Access the full interactive data dashboard →</p>
+      <a class="dashboard-cta" href="https://www.pregnancyjusticeus.org/post-dobbs-pregnancy-criminalization/" target="_blank">View Data Dashboard</a>
+    </div>
+  </div>
+</div>
+
+<!-- DEATHS BEHIND BARS -->
+<div class="page" id="page-deaths">
+  <div class="project-hero">
+    <div class="project-hero-inner">
+      <p class="page-eyebrow">Research Project</p>
+      <h1 class="page-title">Deaths Behind Bars</h1>
+      <p class="lead">Documenting and analyzing deaths in South Carolina's jails and prisons.</p>
+    </div>
+  </div>
+
+  <div class="project-content">
+    <p>People die in custody at alarming rates across the United States, and South Carolina is no exception. This project compiles and analyzes data on deaths occurring in South Carolina's state and local carceral facilities, drawing on public records, official reports, and investigative research.</p>
+    <p>The data project examines the circumstances, demographics, and patterns behind these deaths — asking not only how people are dying, but what structural conditions contribute to mortality behind bars. By making this information public and accessible, the project aims to support accountability, policy reform, and the work of advocates and families seeking answers.</p>
+    <p>This project is supported by funding from <strong>Arnold Ventures</strong>.</p>
+
+    <div class="dashboard-cta-wrap">
+      <p>Access the full interactive data dashboard →</p>
+      <a class="dashboard-cta" href="https://www.incarcerationtransparency.org/southcarolina/" target="_blank">View Data Dashboard</a>
+    </div>
+  </div>
+</div>
+
+<!-- MEDIA -->
+<div class="page" id="page-media">
+  <div class="content-wrap">
+    <p class="page-eyebrow">Press &amp; Media</p>
+    <h1 class="page-title">Media Mentions</h1>
+    <p style="color:var(--muted); font-size:0.95rem; font-weight:300;">Selected press coverage and media appearances.</p>
+
+    <div class="articles-list">
+
+      <div class="article-item">
+        <span class="article-year">2025</span>
+        <div class="article-body">
+          <div class="article-title"><a href="https://www.bangordailynews.com/2025/06/12/midcoast/midcoast-police-courts/maine-jail-officials-minimized-a-pretty-big-red-flag-before-an-inmates-suicide/" target="_blank" style="color:inherit; text-decoration:underline; text-decoration-color: var(--rule); text-underline-offset: 3px; transition: text-decoration-color 0.2s;" onmouseover="this.style.textDecorationColor='var(--accent)'" onmouseout="this.style.textDecorationColor='var(--rule)'">Maine Jail Officials Minimized a 'Big Red Flag' Before a Woman's Suicide</a></div>
+          <div class="article-citation">Bangor Daily News, June 2025</div>
+        </div>
+      </div>
+
+      <div class="article-item">
+        <span class="article-year">2025</span>
+        <div class="article-body">
+          <div class="article-title"><a href="https://www.postandcourier.com/news/crime/charleston-county-jail-death-notice-change/article_956120a5-9af6-4ba7-a508-f903c7e2c043.html" target="_blank" style="color:inherit; text-decoration:underline; text-decoration-color: var(--rule); text-underline-offset: 3px; transition: text-decoration-color 0.2s;" onmouseover="this.style.textDecorationColor='var(--accent)'" onmouseout="this.style.textDecorationColor='var(--rule)'">Ending Prompt Notice of Deaths at Charleston Jail a Step Backward, Attorneys Say</a></div>
+          <div class="article-citation">Post and Courier, 2025</div>
+        </div>
+      </div>
+
+      <div class="article-item">
+        <span class="article-year">2024</span>
+        <div class="article-body">
+          <div class="article-title"><a href="https://www.themarshallproject.org/2024/10/31/stillbirth-oklahoma-arkansas-women-investigated" target="_blank" style="color:inherit; text-decoration:underline; text-decoration-color: var(--rule); text-underline-offset: 3px; transition: text-decoration-color 0.2s;" onmouseover="this.style.textDecorationColor='var(--accent)'" onmouseout="this.style.textDecorationColor='var(--rule)'">How Some States Turn Pregnancy Loss Into Criminal Cases Against Women</a></div>
+          <div class="article-citation">The Marshall Project, October 2024</div>
+        </div>
+      </div>
+
+      <div class="article-item">
+        <span class="article-year">2024</span>
+        <div class="article-body">
+          <div class="article-title"><a href="https://www.postandcourier.com/news/pregnancy-miscarriage-stillbirth-arrest-prosecution-dobbs/article_a3ad3c0a-96e5-11ef-8753-dbceda639ec9.html" target="_blank" style="color:inherit; text-decoration:underline; text-decoration-color: var(--rule); text-underline-offset: 3px; transition: text-decoration-color 0.2s;" onmouseover="this.style.textDecorationColor='var(--accent)'" onmouseout="this.style.textDecorationColor='var(--rule)'">Pregnancy Prosecutions Appear to Rise After Dobbs Ruling</a></div>
+          <div class="article-citation">Post and Courier, October 2024</div>
+        </div>
+      </div>
+
+      <div class="article-item">
+        <span class="article-year">2023</span>
+        <div class="article-body">
+          <div class="article-title"><a href="https://www.postandcourier.com/news/south-carolina-county-jails-conditions-failure/article_e8319a4c-7503-11ee-b3aa-0712e5ec0f73.html" target="_blank" style="color:inherit; text-decoration:underline; text-decoration-color: var(--rule); text-underline-offset: 3px; transition: text-decoration-color 0.2s;" onmouseover="this.style.textDecorationColor='var(--accent)'" onmouseout="this.style.textDecorationColor='var(--rule)'">Sexual Assaults. Riots. Too Few Guards. Why Can't the State Fix County Jails?</a></div>
+          <div class="article-citation">Post and Courier, 2023</div>
+        </div>
+      </div>
+
+      <div class="article-item">
+        <span class="article-year">2023</span>
+        <div class="article-body">
+          <div class="article-title"><a href="https://www.democracynow.org/2023/7/27/racialized_violence_of_police_canine_force" target="_blank" style="color:inherit; text-decoration:underline; text-decoration-color: var(--rule); text-underline-offset: 3px; transition: text-decoration-color 0.2s;" onmouseover="this.style.textDecorationColor='var(--accent)'" onmouseout="this.style.textDecorationColor='var(--rule)'">Brutal Ohio Police Dog Attack on Black Truck Driver Highlights Pattern, Echoes Violence of Slavery</a></div>
+          <div class="article-citation">Democracy Now!, July 2023</div>
+        </div>
+      </div>
+
+      <div class="article-item">
+        <span class="article-year">2023</span>
+        <div class="article-body">
+          <div class="article-title"><a href="https://nclawyersweekly.com/2023/10/23/city-copes-with-aftermath-of-police-dog-attack/" target="_blank" style="color:inherit; text-decoration:underline; text-decoration-color: var(--rule); text-underline-offset: 3px; transition: text-decoration-color 0.2s;" onmouseover="this.style.textDecorationColor='var(--accent)'" onmouseout="this.style.textDecorationColor='var(--rule)'">City Copes with Aftermath of Police Dog Attack</a></div>
+          <div class="article-citation">North Carolina Lawyers Weekly, October 2023</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- CV -->
+<div class="page" id="page-cv">
+  <div class="content-wrap" style="max-width:860px;">
+    <p class="page-eyebrow">Curriculum Vitae</p>
+    <h1 class="page-title">Madalyn K. Wasilczuk</h1>
+    <p style="font-size:0.85rem; color:var(--muted);">1525 Senate Street, Suite 354 · Columbia, SC 29208 · 803.777.3393</p>
+    <div class="divider"></div>
+
+    <!-- Current Appointment -->
+    <h2 style="font-family:'Playfair Display',Georgia,serif; font-size:1rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-bottom:1.25rem;">Current Appointment</h2>
+    <p><strong>University of South Carolina Joseph F. Rice School of Law</strong>, Columbia, SC</p>
+    <p><em>Associate Professor of Law</em>, August 2025–Present<br>
+    <em>Assistant Professor of Law</em>, August 2021–August 2025<br>
+    <em>Faculty Affiliate, USC Center for Civil Rights History and Research</em>, 2025–2026</p>
+    <p>Courses: Youth Defender Clinic, Juvenile Justice Seminar, Eighth Amendment Law & Litigation, Criminal Adjudication, Insider Knowledge: Carceral Institutions from Behind the Bars (Reading Group), Clinics II</p>
+    <p>Honors: Ian Kerr Best Paper Awardee 2025, Privacy Law Scholars Conference, for <em>The Interdisciplinary Policing of Pregnancy Criminalization</em> (with Wendy A. Bach & Ji Seon Song) · American Bar Foundation Fellow, named 2023 · Research Grant Awardee, Advancement of Children's Constitutional Rights Consortium, 2023 · Bellow Scholar, <em>Deaths Behind Bars in South Carolina</em>, AALS Clinical Legal Education Section, 2023–2024 · Outstanding Faculty Publication Award – Article, for <em>The Racialized Violence of Police Canine Force</em>, 2023 · Center for Teaching Excellence Innovative Pedagogy Grantee, 2022</p>
+    <p>Leadership: Principal Investigator, Carceral Studies Working Group (cross-campus working group sponsored by the Humanities Collaborative), 2023–2025</p>
+    <div class="divider"></div>
+
+    <!-- Past Appointment -->
+    <h2 style="font-family:'Playfair Display',Georgia,serif; font-size:1rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-bottom:1.25rem;">Past Appointment</h2>
+    <p><strong>LSU Paul M. Hebert Law Center</strong>, Baton Rouge, LA</p>
+    <p><em>Assistant Professor of Professional Practice</em>, August 2018–May 2021<br>
+    <em>Director, Juvenile Defense Clinic</em>, August 2018–May 2021</p>
+    <p>Courses: Juvenile Defense Clinic Course, Juvenile Defense Clinic Practicum, Capital Punishment, Abolish or Reform: The Future of U.S. Justice</p>
+    <p>Honors: LSU Internationalization Grant Recipient, 2019–2020</p>
+    <div class="divider"></div>
+
+    <!-- Publications -->
+    <h2 style="font-family:'Playfair Display',Georgia,serif; font-size:1rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-bottom:1.25rem;">Publications &amp; Works in Progress</h2>
+
+    <p style="font-family:'Playfair Display',Georgia,serif; font-size:0.95rem; font-weight:600; margin-bottom:0.5rem;">Law Review Articles</p>
+
+    <div class="articles-list" style="margin-bottom:2rem;">
+      <div class="article-item">
+        <span class="article-year" style="min-width:60px;">In progress</span>
+        <div class="article-body">
+          <div class="article-title"><em>Pregnancy's Criminal Procedure Problem</em> (formerly <em>The Interdisciplinary Policing of Pregnancy Criminalization</em>)</div>
+          <div class="article-citation">Work in progress</div>
+        </div>
+      </div>
+      <div class="article-item">
+        <span class="article-year">2024</span>
+        <div class="article-body">
+          <div class="article-title"><a href="https://wlr.law.wisc.edu/wp-content/uploads/sites/1263/2024/05/18-Wasilczuk-Online-UPDATED.pdf" target="_blank" style="color:inherit;text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px;" onmouseover="this.style.textDecorationColor='var(--accent)'" onmouseout="this.style.textDecorationColor='var(--rule)'">Killing Stays</a></div>
+          <div class="article-citation">2024 Wis. L. Rev. 859</div>
+        </div>
+      </div>
+      <div class="article-item">
+        <span class="article-year">2023</span>
+        <div class="article-body">
+          <div class="article-title"><a href="https://www.law.georgetown.edu/georgetown-law-journal/wp-content/uploads/sites/26/2023/07/GT-GGLJ230026.pdf" target="_blank" style="color:inherit;text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px;" onmouseover="this.style.textDecorationColor='var(--accent)'" onmouseout="this.style.textDecorationColor='var(--rule)'">The Racialized Violence of Police Canine Force</a></div>
+          <div class="article-citation">111 Geo. L.J. 1125 (2023)</div>
+        </div>
+      </div>
+      <div class="article-item">
+        <span class="article-year">2023</span>
+        <div class="article-body">
+          <div class="article-title"><a href="https://www.law.nyu.edu/sites/default/files/Wasilczuk%20-%20Clinic%20as%20Site%20of%20Grounded%20Pedagogy.pdf" target="_blank" style="color:inherit;text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px;" onmouseover="this.style.textDecorationColor='var(--accent)'" onmouseout="this.style.textDecorationColor='var(--rule)'">The Clinic as a Site of Grounded Pedagogy</a></div>
+          <div class="article-citation">29 Clin. L. Rev. 405 (2023)</div>
+        </div>
+      </div>
+      <div class="article-item">
+        <span class="article-year">2023</span>
+        <div class="article-body">
+          <div class="article-title"><a href="https://scholarlycommons.law.cwsl.edu/cwlr/vol59/iss1/2/" target="_blank" style="color:inherit;text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px;" onmouseover="this.style.textDecorationColor='var(--accent)'" onmouseout="this.style.textDecorationColor='var(--rule)'">For Their Own Good: Girls, Sexuality, and State Violence in the Name of Safety</a></div>
+          <div class="article-citation">59 Cal. W. L. Rev. 1 (2023) (invited symposium)</div>
+        </div>
+      </div>
+      <div class="article-item">
+        <span class="article-year">2022</span>
+        <div class="article-body">
+          <div class="article-title"><a href="https://digitalcommons.law.buffalo.edu/buffalolawreview/vol70/iss1/7/" target="_blank" style="color:inherit;text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px;" onmouseover="this.style.textDecorationColor='var(--accent)'" onmouseout="this.style.textDecorationColor='var(--rule)'">Developing Police</a></div>
+          <div class="article-citation">70 Buff. L. Rev. 271 (2022)</div>
+        </div>
+      </div>
+      <div class="article-item">
+        <span class="article-year">2020</span>
+        <div class="article-body">
+          <div class="article-title"><a href="https://arizonastatelawjournal.org/wp-content/uploads/2021/01/Wasilczuk-Final-1.pdf" target="_blank" style="color:inherit;text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px;" onmouseover="this.style.textDecorationColor='var(--accent)'" onmouseout="this.style.textDecorationColor='var(--rule)'">Lessons from Disaster: Assessing the COVID-19 Response in Youth Jails & Prisons</a></div>
+          <div class="article-citation">2 Ariz. St. L.J. Online 221 (2020)</div>
+        </div>
+      </div>
+    </div>
+
+    <p style="font-family:'Playfair Display',Georgia,serif; font-size:0.95rem; font-weight:600; margin-bottom:0.5rem;">Book Chapters</p>
+    <div class="articles-list" style="margin-bottom:2rem;">
+      <div class="article-item">
+        <span class="article-year">2023</span>
+        <div class="article-body">
+          <div class="article-title"><em>Coker v. Georgia</em>, Rewritten Opinion</div>
+          <div class="article-citation">in Feminist Judgments: Rewritten Criminal Law Opinions (Bennet Capers, Sarah Deer & Corey Rayburn Yung, eds., Cambridge University Press 2023)</div>
+        </div>
+      </div>
+    </div>
+
+    <p style="font-family:'Playfair Display',Georgia,serif; font-size:0.95rem; font-weight:600; margin-bottom:0.5rem;">Reports</p>
+    <div class="articles-list" style="margin-bottom:2rem;">
+      <div class="article-item">
+        <span class="article-year">2024</span>
+        <div class="article-body">
+          <div class="article-title"><a href="https://www.pregnancyjusticeus.org/wp-content/uploads/2024/09/Pregnancy-as-a-Crime.pdf" target="_blank" style="color:inherit;text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px;" onmouseover="this.style.textDecorationColor='var(--accent)'" onmouseout="this.style.textDecorationColor='var(--rule)'">Pregnancy as a Crime: A Preliminary Report on the First Year After Dobbs</a></div>
+          <div class="article-citation">Sept. 2024 (co-authored with Wendy A. Bach). Received more than 400 media mentions in the first two days after launch, including coverage by Time, CNN, Newsweek, The Guardian, Rolling Stone, CBS News, ABC News, The Associated Press, Jezebel, Mother Jones, and The Root.</div>
+        </div>
+      </div>
+      <div class="article-item">
+        <span class="article-year">2023</span>
+        <div class="article-body">
+          <div class="article-title"><a href="https://www.incarcerationtransparency.org/southcarolina/" target="_blank" style="color:inherit;text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px;" onmouseover="this.style.textDecorationColor='var(--accent)'" onmouseout="this.style.textDecorationColor='var(--rule)'">South Carolina Deaths Behind Bars: 2015–2021</a></div>
+          <div class="article-citation">Jan. 2023</div>
+        </div>
+      </div>
+    </div>
+
+    <p style="font-family:'Playfair Display',Georgia,serif; font-size:0.95rem; font-weight:600; margin-bottom:0.5rem;">Book Reviews</p>
+    <div class="articles-list" style="margin-bottom:2rem;">
+      <div class="article-item">
+        <span class="article-year">2023</span>
+        <div class="article-body">
+          <div class="article-title"><a href="https://clcjbooks.rutgers.edu/books/indefinite-doing-time-in-jail/" target="_blank" style="color:inherit;text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px;" onmouseover="this.style.textDecorationColor='var(--accent)'" onmouseout="this.style.textDecorationColor='var(--rule)'">Review of Indefinite: Doing Time in Jail</a></div>
+          <div class="article-citation">Rutgers Crim. L. & Crim. Just. Books (March 2023)</div>
+        </div>
+      </div>
+    </div>
+
+    <p style="font-family:'Playfair Display',Georgia,serif; font-size:0.95rem; font-weight:600; margin-bottom:0.5rem;">Op-Eds &amp; Short Articles</p>
+    <div class="articles-list" style="margin-bottom:2rem;">
+      <div class="article-item">
+        <span class="article-year">2023</span>
+        <div class="article-body">
+          <div class="article-title"><a href="https://harvardlawreview.org/blog/2023/04/fifth-amendment-rights-as-abortion-rights/" target="_blank" style="color:inherit;text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px;" onmouseover="this.style.textDecorationColor='var(--accent)'" onmouseout="this.style.textDecorationColor='var(--rule)'">5th Amendment Rights as Abortion Rights</a></div>
+          <div class="article-citation">Harv. L. Rev. Blog (Apr. 11, 2023)</div>
+        </div>
+      </div>
+      <div class="article-item">
+        <span class="article-year">2022</span>
+        <div class="article-body">
+          <div class="article-title"><a href="https://www.lawfareblog.com/how-young-too-young-be-police-officer" target="_blank" style="color:inherit;text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px;" onmouseover="this.style.textDecorationColor='var(--accent)'" onmouseout="this.style.textDecorationColor='var(--rule)'">How Young Is Too Young To Be a Police Officer?</a></div>
+          <div class="article-citation">Lawfare (Jul. 29, 2022)</div>
+        </div>
+      </div>
+      <div class="article-item">
+        <span class="article-year">2021</span>
+        <div class="article-body">
+          <div class="article-title"><a href="https://www.theadvocate.com/baton_rouge/opinion/article_b6ae8b04-d688-11eb-9cb4-cb56948ed5c2.html" target="_blank" style="color:inherit;text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px;" onmouseover="this.style.textDecorationColor='var(--accent)'" onmouseout="this.style.textDecorationColor='var(--rule)'">Rules are meant to protect children, but police use them to shield themselves</a></div>
+          <div class="article-citation">The Advocate (Jun. 30, 2021)</div>
+        </div>
+      </div>
+      <div class="article-item">
+        <span class="article-year">2020</span>
+        <div class="article-body">
+          <div class="article-title"><a href="https://www.theadvocate.com/baton_rouge/opinion/article_a5880868-5a75-11ea-a075-6b6eaf99834e.html" target="_blank" style="color:inherit;text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px;" onmouseover="this.style.textDecorationColor='var(--accent)'" onmouseout="this.style.textDecorationColor='var(--rule)'">Two tragedies occur when youths kill, end up in adult prisons</a></div>
+          <div class="article-citation">The Advocate (Mar. 4, 2020)</div>
+        </div>
+      </div>
+      <div class="article-item">
+        <span class="article-year">2018</span>
+        <div class="article-body">
+          <div class="article-title"><a href="https://ilg2.org/2018/04/24/applying-the-death-penalty-to-drug-dealers-is-never-appropriate-it-violates-international-law/" target="_blank" style="color:inherit;text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px;" onmouseover="this.style.textDecorationColor='var(--accent)'" onmouseout="this.style.textDecorationColor='var(--rule)'">Applying the death penalty to drug dealers is never 'appropriate'. It violates international law.</a></div>
+          <div class="article-citation">IntLawGrrls (Apr. 24, 2018)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Grants -->
+    <h2 style="font-family:'Playfair Display',Georgia,serif; font-size:1rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-bottom:1.25rem;">Grants</h2>
+    <p><strong>Co-Principal Investigator, Tracking the Criminalization of Pregnancy After <em>Dobbs</em></strong><br>
+    Co-principal investigator on a grant of $2,403,621 from an anonymous donor to partner with Pregnancy Justice and Professor Wendy Bach, University of Tennessee – Knoxville. Received $215,345.49 for research from May 15, 2024 to April 30, 2027.</p>
+    <p><strong>Principal Investigator, Deaths Behind Bars in South Carolina</strong><br>
+    Received $99,575 from Arnold Ventures to fund research from January 1, 2024 to December 31, 2026.</p>
+    <div class="divider"></div>
+
+    <!-- Education -->
+    <h2 style="font-family:'Playfair Display',Georgia,serif; font-size:1rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-bottom:1.25rem;">Education</h2>
+    <p><strong>New York University School of Law</strong>, New York, NY<br>
+    J.D., May 2013<br>
+    Honors: Leonard J. Schreier Memorial Prize (for academic excellence in ethics) · <em>Journal of International Law and Politics</em>, Senior Notes Editor · AmeriCorps Equal Justice Works Summer Corps Scholarship Recipient 2012 · Pro Bono Service Award</p>
+    <p><strong>American University</strong>, Washington, DC<br>
+    B.A. in International Studies, Spanish Translation Certificate<br>
+    <em>University Honors in International Studies Major, Phi Beta Kappa, summa cum laude</em>, May 2009</p>
+    <div class="divider"></div>
+
+    <!-- Professional Experience -->
+    <h2 style="font-family:'Playfair Display',Georgia,serif; font-size:1rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-bottom:1.25rem;">Selected Professional Experience</h2>
+    <p><strong>Deason Criminal Justice Reform Center, SMU Law</strong>, June–August 2019<br>
+    <em>LSU Field Placement Supervisor.</em> Supervised students researching COVID-19 policies in the criminal legal system for the Deason Center Pandemic Policy Project.</p>
+    <p><strong>International Legal Foundation</strong>, Myanmar, May–July 2019<br>
+    <em>International Fellow.</em> Supported the development of specialized juvenile divisions in Myanmar public defender offices. Trained Myanmar public defenders on the Convention of the Rights of the Child, principles and practices in juvenile defense, and adolescent brain development science. Consulted with UNICEF on priority issues in juvenile justice.</p>
+    <p><strong>Cornell Center on the Death Penalty Worldwide</strong>, Ithaca, NY, August 2016–May 2018<br>
+    <em>Clinical Teaching Fellow.</em> Supervised student practice on death penalty cases in the U.S., Malawi, Tanzania, and Zambia. Co-taught the International Human Rights Clinic. Presented at and trained lawyers at the Makwanyane Institute. Drafted submissions to the High Court of Malawi. Lobbied members of the United Nations Human Rights Committee and Human Rights Council.</p>
+    <p><strong>The Defender Association of Philadelphia</strong>, Philadelphia, PA, September 2013–August 2016<br>
+    <em>Assistant Defender.</em> Tried over 50 misdemeanor and felony bench trials. Litigated over 35 motions to suppress. Represented juvenile clients in delinquency proceedings in Philadelphia Family Court.</p>
+    <div class="divider"></div>
+
+    <!-- Bar Admissions -->
+    <h2 style="font-family:'Playfair Display',Georgia,serif; font-size:1rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-bottom:1.25rem;">Bar Admissions &amp; Languages</h2>
+    <p>Admitted to the Bar of the Commonwealth of Pennsylvania (2013), State of Louisiana (2018), Middle District of Louisiana (2018), Eastern District of Louisiana (2018), Fifth Circuit (2018), and State of South Carolina (2022, limited to clinical practice). Proficient in Spanish. Basic knowledge of Swahili and French.</p>
+    <div class="divider"></div>
+
+    <!-- Download link -->
+    <p style="font-size:0.85rem; color:var(--muted);">For a complete CV including academic presentations and service, please <a href="WASILCZUK_-_MADALYN_-_CV_February_2026.docx" download style="color:var(--accent);">download the full CV</a>.</p>
+
+  </div>
+</div>
+
+<footer>
+  <p>Madalyn K. Wasilczuk &nbsp;·&nbsp; Associate Professor of Law &nbsp;·&nbsp; University of South Carolina Joseph F. Rice School of Law</p>
+</footer>
+
+<script>
+  function showPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    document.getElementById('page-' + id).classList.add('active');
+    document.getElementById('nav-' + id).classList.add('active');
+    window.scrollTo(0, 0);
+    return false;
+  }
+</script>
+
+</body>
+</html>
