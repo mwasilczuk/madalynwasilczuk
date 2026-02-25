@@ -387,28 +387,394 @@
 
 <!-- HOME -->
 <div class="page active" id="page-home">
-  <div class="home-hero">
-    <p class="eyebrow">Lawyer &amp; Legal Scholar</p>
-    <h1>Madalyn K.<br><em>Wasilczuk</em></h1>
-    <p class="lead">Associate Professor of Law at the University of South Carolina Joseph F. Rice School of Law. Her research examines state violence, criminalization, incarceration, and the law's role in shaping harm and inequality.</p>
-    <div class="home-rule"></div>
+
+  <style>
+    /* ---- HOME REDESIGN ---- */
+    .home-masthead {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: calc(100vh - 60px);
+    }
+
+    .home-left {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 5rem 4rem 5rem 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .home-left::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 320px; height: 320px;
+      border-radius: 50%;
+      border: 1px solid rgba(154,124,47,0.25);
+      pointer-events: none;
+    }
+
+    .home-left::after {
+      content: '';
+      position: absolute;
+      bottom: 60px; left: -40px;
+      width: 180px; height: 180px;
+      border-radius: 50%;
+      border: 1px solid rgba(154,124,47,0.15);
+      pointer-events: none;
+    }
+
+    .home-name-block {
+      position: relative;
+      z-index: 1;
+    }
+
+    .home-kicker {
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent-light);
+      margin-bottom: 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .home-kicker::before {
+      content: '';
+      display: inline-block;
+      width: 24px;
+      height: 1px;
+      background: var(--accent-light);
+    }
+
+    .home-name {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(3rem, 5.5vw, 4.8rem);
+      font-weight: 400;
+      line-height: 1.05;
+      color: var(--paper);
+      margin-bottom: 0.15em;
+    }
+
+    .home-name em {
+      font-style: italic;
+      color: var(--accent-light);
+      display: block;
+    }
+
+    .home-tagline {
+      margin-top: 2.5rem;
+      font-size: 1rem;
+      line-height: 1.75;
+      color: #a8aab8;
+      font-weight: 300;
+      max-width: 360px;
+    }
+
+    .home-tagline strong {
+      color: var(--paper);
+      font-weight: 400;
+    }
+
+    .home-credentials {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 2rem;
+      margin-top: 3rem;
+    }
+
+    .home-credentials-item {
+      font-size: 0.75rem;
+      color: #7a7d8c;
+      letter-spacing: 0.06em;
+      line-height: 1.6;
+      margin-bottom: 0.25rem;
+    }
+
+    .home-credentials-item strong {
+      color: #b0b3c0;
+      font-weight: 400;
+    }
+
+    /* Right side */
+    .home-right {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .home-photo-block {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      background: var(--warm-mid);
+    }
+
+    .home-photo-block img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      filter: grayscale(15%);
+    }
+
+    .home-photo-overlay {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: linear-gradient(to top, rgba(30,35,48,0.6) 0%, transparent 60%);
+      padding: 2.5rem 2.5rem 2rem;
+    }
+
+    .home-photo-caption {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(247,248,250,0.75);
+    }
+
+    /* Research section — full width below the masthead */
+    .home-research-strip {
+      border-top: 1px solid var(--rule);
+    }
+
+    .home-research-header {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 2rem 4rem;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .home-research-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .home-research-rule {
+      flex: 1;
+      height: 1px;
+      background: var(--rule);
+    }
+
+    .home-projects-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .home-project-item {
+      padding: 3rem 4rem;
+      border-right: 1px solid var(--rule);
+      cursor: pointer;
+      transition: background 0.2s;
+      text-decoration: none;
+      display: block;
+      color: var(--ink);
+    }
+
+    .home-project-item:last-child { border-right: none; }
+
+    .home-project-item:hover { background: var(--warm-mid); }
+
+    .home-project-num {
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+    }
+
+    .home-project-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.45rem;
+      font-weight: 600;
+      line-height: 1.25;
+      margin-bottom: 1rem;
+      color: var(--ink);
+    }
+
+    .home-project-desc {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.7;
+      font-weight: 300;
+      margin-bottom: 1.5rem;
+    }
+
+    .home-project-stat {
+      display: inline-block;
+      padding: 0.35rem 0.85rem;
+      background: var(--ink);
+      color: var(--paper);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .home-project-link {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: block;
+      margin-top: 1.5rem;
+    }
+
+    /* Featured piece / recent work */
+    .home-featured {
+      border-top: 1px solid var(--rule);
+      padding: 3rem 4rem;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .home-featured-label {
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      transform: rotate(180deg);
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .home-featured-content {}
+
+    .home-featured-eyebrow {
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+
+    .home-featured-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.3rem, 2vw, 1.75rem);
+      font-weight: 400;
+      line-height: 1.3;
+      color: var(--ink);
+      margin-bottom: 0.75rem;
+    }
+
+    .home-featured-title a {
+      color: inherit;
+      text-decoration: underline;
+      text-decoration-color: var(--rule);
+      text-underline-offset: 4px;
+      transition: text-decoration-color 0.2s;
+    }
+
+    .home-featured-title a:hover {
+      text-decoration-color: var(--accent);
+    }
+
+    .home-featured-meta {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .home-featured-media {
+      margin-top: 1rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    /* Responsive */
+    @media (max-width: 780px) {
+      .home-masthead { grid-template-columns: 1fr; }
+      .home-left { padding: 3.5rem 1.8rem; }
+      .home-photo-block { min-height: 320px; }
+      .home-research-header { padding: 1.5rem 1.8rem; }
+      .home-projects-grid { grid-template-columns: 1fr; }
+      .home-project-item { padding: 2.5rem 1.8rem; border-right: none; border-bottom: 1px solid var(--rule); }
+      .home-featured { padding: 2.5rem 1.8rem; grid-template-columns: 1fr; gap: 1rem; }
+      .home-featured-label { writing-mode: horizontal-tb; transform: none; }
+    }
+  </style>
+
+  <div class="home-masthead">
+    <!-- Left: name & bio -->
+    <div class="home-left">
+      <div class="home-name-block">
+        <p class="home-kicker">Law · Race · Punishment · Power</p>
+        <h1 class="home-name">
+          Madalyn K.<br>
+          <em>Wasilczuk</em>
+        </h1>
+        <p class="home-tagline">
+          Associate Professor of Law examining how <strong>the legal system produces and perpetuates harm</strong> — through policing, prosecution, incarceration, and the criminalization of pregnancy and poverty.
+        </p>
+      </div>
+
+      <div class="home-credentials">
+        <p class="home-credentials-item"><strong>University of South Carolina</strong> · Joseph F. Rice School of Law</p>
+        <p class="home-credentials-item"><strong>American Bar Foundation Fellow</strong> · 2023</p>
+        <p class="home-credentials-item"><strong>Co-PI</strong> · Tracking Pregnancy Criminalization After <em>Dobbs</em></p>
+        <p class="home-credentials-item" style="margin-top:1.5rem;">
+          <a href="#" onclick="showPage('cv')" style="color:var(--accent-light); font-size:0.72rem; letter-spacing:0.14em; text-transform:uppercase; text-decoration:none;">Full CV →</a>
+          &nbsp;&nbsp;
+          <a href="#" onclick="showPage('about')" style="color:#7a7d8c; font-size:0.72rem; letter-spacing:0.14em; text-transform:uppercase; text-decoration:none;">About →</a>
+        </p>
+      </div>
+    </div>
+
+    <!-- Right: photo -->
+    <div class="home-right">
+      <div class="home-photo-block">
+        <img src="headshot.jpg" alt="Madalyn K. Wasilczuk">
+        <div class="home-photo-overlay">
+          <span class="home-photo-caption">USC Joseph F. Rice School of Law</span>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="home-research-areas">
-    <h2>Research Projects</h2>
-    <div class="project-cards">
-      <a class="project-card" href="#" onclick="showPage('pregnancy')">
-        <h3>Pregnancy Criminalization</h3>
-        <p>Tracking criminal prosecutions related to pregnancy across the United States, in collaboration with Professor Wendy Bach, Dr. Kendra Hutchens, and Pregnancy Justice.</p>
-        <span class="card-arrow">Explore →</span>
+  <!-- Research strip -->
+  <div class="home-research-strip">
+    <div class="home-research-header">
+      <span class="home-research-label">Current Research</span>
+      <div class="home-research-rule"></div>
+    </div>
+    <div class="home-projects-grid">
+      <a class="home-project-item" href="#" onclick="showPage('pregnancy')">
+        <h3 class="home-project-title">Pregnancy Criminalization After <em>Dobbs</em></h3>
+        <p class="home-project-desc">A national study tracking criminal prosecutions related to pregnancy in the United States — documenting the defendants, charges, and systems of surveillance that make these prosecutions possible.</p>
+        <span class="home-project-stat">412 Cases · 16 States</span>
+        <span class="home-project-link">View the research →</span>
       </a>
-      <a class="project-card" href="#" onclick="showPage('deaths')">
-        <h3>Deaths Behind Bars</h3>
-        <p>The only publicly available dataset of deaths in South Carolina's lockups, juvenile detention centers, jails, and prisons since 2015, supported by Arnold Ventures.</p>
-        <span class="card-arrow">Explore →</span>
+      <a class="home-project-item" href="#" onclick="showPage('deaths')">
+        <h3 class="home-project-title">Deaths Behind Bars in South Carolina</h3>
+        <p class="home-project-desc">The only publicly available dataset of deaths in South Carolina's lockups, juvenile detention centers, jails, and prisons — asking not only how people die in custody, but why.</p>
+        <span class="home-project-stat">2015–Present · Arnold Ventures</span>
+        <span class="home-project-link">View the data →</span>
       </a>
     </div>
   </div>
+
+  <!-- Featured work -->
+  <div class="home-featured">
+    <span class="home-featured-label">Featured Work</span>
+    <div class="home-featured-content">
+      <p class="home-featured-eyebrow">Report · 2024</p>
+      <h2 class="home-featured-title">
+        <a href="https://www.pregnancyjusticeus.org/wp-content/uploads/2024/09/Pregnancy-as-a-Crime.pdf" target="_blank">Pregnancy as a Crime: A Preliminary Report on the First Year After <em>Dobbs</em></a>
+      </h2>
+      <p class="home-featured-meta">Co-authored with Wendy A. Bach · Pregnancy Justice, September 2024</p>
+      <p class="home-featured-media">Covered by Time, CNN, Newsweek, The Guardian, Rolling Stone, CBS News, ABC News, AP, Jezebel, Mother Jones, The Root · 400+ media mentions in first 48 hours</p>
+    </div>
+  </div>
+
 </div>
 
 <!-- ABOUT -->
